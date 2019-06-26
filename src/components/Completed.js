@@ -1,20 +1,20 @@
 import React from 'react';
 
-const Completed = ({completed}) => {
+const Completed = ({completed, showCompleted}) => {
     const completedList = completed.length ? (completed.map(done => {
       return (
         <div className="completed collection" key={done.id}>
-          <div>{done.content}</div>
+          <div class="collection-item grey lighten-4">{done.content}</div>
         </div>
       );
     })) : (
-      <p className="center">You have not completeed any todo's!</p>
+      <p>You have not completeed any todo's!</p>
     )
-    return (
+    return showCompleted ? (
       <div className="completed-list">
         {completedList}
       </div>
-    );
+    ): null;
 }
 
 export default Completed;

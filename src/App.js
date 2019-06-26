@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Todos from './components/Todos.js';
 import AddTodo from './components/AddTodo.js';
 import Completed from './components/Completed.js';
+import ToggleCompleted from './components/ToggleCompleted.js';
 
 class App extends Component {
   state = {
@@ -10,8 +11,7 @@ class App extends Component {
       { id: 2, content: 'play board games'}
     ],
     completed : [],
-    showCompleted : false,
-    completedButtonText : "Show Completed"
+    showCompleted : false
   }
   addTodo = todo => {
     todo.id = Math.random();
@@ -20,6 +20,13 @@ class App extends Component {
   }
 
   deleteTodo = (id) => {
+    let todos = this.state.todos.filter(todo => {
+      return id !== todo.id;
+    })
+    this.setState({todos});
+  }
+
+  completeTodo = (id) => {
     let completed = [...this.state.completed];
     let todos = this.state.todos.filter(todo => {
       if (id === todo.id){
@@ -31,20 +38,18 @@ class App extends Component {
     this.setState({todos, completed});
   }
 
-  toggleCompleted = () => {
-    let showCompleted = !this.state.showCompleted;
-    let completedButtonText = showCompleted ? "Hide Completed" : "Show Completed";
-    this.setState({showCompleted, completedButtonText});
+  setShowCompleted = showCompleted => {
+    this.setState({showCompleted});
   }
 
   render() {
     return (
       <div className="todo-app container">
         <h1 className="center teal-text">Todo List</h1>
-        <Todos todos={this.state.todos} deleteTodo={this.deleteTodo}/>
-        {this.state.showCompleted ? <Completed completed={this.state.completed}/> : null}
+        <Todos todos={this.state.todos} deleteTodo={this.deleteTodo} completeTodo={this.completeTodo}/>
+        <Completed showCompleted={this.state.showCompleted} completed={this.state.completed}/>
         <AddTodo addTodo={this.addTodo}/>
-        <button onClick={this.toggleCompleted}>{this.state.completedButtonText}</button>
+        <ToggleCompleted showCompleted={this.state.showCompleted} setShowCompleted={this.setShowCompleted}/>
       </div>
     );
   }
