@@ -1,20 +1,31 @@
-import React from 'react';
+import React, { Component } from 'react';
+import {connect} from 'react-redux';
 
-const Completed = ({completed, showCompleted}) => {
-    const completedList = completed.length ? (completed.map(done => {
+class Completed extends Component {
+    getcompletedList = () => {return this.props.completed.length ? (this.props.completed.map((done, index) => {
       return (
-        <div className="completed collection" key={done.id}>
+        <div className="completed collection" key={done.index}>
           <div class="collection-item grey lighten-4">{done.content}</div>
         </div>
       );
     })) : (
       <p>You have not completeed any todo's!</p>
-    )
-    return showCompleted ? (
+    )}
+    
+    render () {return this.props.showCompleted ? (
       <div className="completed-list">
-        {completedList}
+        {this.getcompletedList()}
       </div>
     ): null;
+    }
 }
 
-export default Completed;
+
+const mapStateToProps = state => {
+  return {
+    completed: state.completed,
+    showCompleted: state.showCompleted
+  }
+}
+
+export default connect(mapStateToProps)(Completed);

@@ -1,23 +1,41 @@
-import React from 'react';
+import React, { Component } from 'react';
+import {connect} from 'react-redux';
+import {deleteTodo, completeTodo} from '../actions/todoActions';
 
-const Todos = ({todos, deleteTodo, completeTodo}) => {
-    const todoList = todos.length ? (todos.map(todo => {
+class Todos extends Component {
+    getTodoList = () => { return this.props.todos.length ? (this.props.todos.map((todo, index) => {
       return (
-        <div className="todos collection" key={todo.id}>
-          <div class="collection-item">{todo.content}
-            <button class="secondary-content red darken-1 waves-effect waves-light btn-small" onClick={() => deleteTodo(todo.id)}>Delete</button>
-            <button class="secondary-content waves-effect waves-light btn-small" onClick={() => completeTodo(todo.id)}>Complete</button>
+        <div className="todos collection" key={index}>
+          <div className="collection-item">{todo.content}
+            <button className="secondary-content red darken-1 waves-effect waves-light btn-small" onClick={() => this.props.deleteTodo(index)}>Delete</button>
+            <button className="secondary-content waves-effect waves-light btn-small" onClick={() => this.props.completeTodo(index)}>Complete</button>
           </div>
         </div>
       );
     })) : (
       <p>You have no todo's!</p>
-    )
-    return (
-      <div className="todo-list">
-        {todoList}
-      </div>
-    );
+    )}
+
+    render() {
+      return (
+        <div className="todo-list">
+          {this.getTodoList()}
+        </div>
+      );
+  }
 }
 
-export default Todos;
+const mapStateToProps = state => {
+  return {
+    todos: state.todos
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    deleteTodo: index => { dispatch (deleteTodo(index))},
+    completeTodo: index => { dispatch (completeTodo(index))}
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Todos);

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
+import {setShowCompleted} from '../actions/todoActions';
 
 class ToggleCompleted extends Component {
   state = {
@@ -15,11 +17,23 @@ class ToggleCompleted extends Component {
     return (
       <div>
       <br/>
-      <button class="waves-effect waves-light btn deep-purple lighten-3" onClick={this.onClick}>{this.state.completedButtonText}</button>
+      <button className="waves-effect waves-light btn deep-purple lighten-3" onClick={this.onClick}>{this.state.completedButtonText}</button>
       </div>
     );
   }
 
 }
 
-export default ToggleCompleted;
+const mapStateToProps = state => {
+  return {
+    showCompleted: state.showCompleted
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    setShowCompleted: showCompleted => { dispatch (setShowCompleted(showCompleted))}
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ToggleCompleted);

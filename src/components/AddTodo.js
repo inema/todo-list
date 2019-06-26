@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
+import {addTodo} from '../actions/todoActions';
 
 class AddTodo extends Component {
   state = {
-    id: null,
     content: ''
   }
 
@@ -23,7 +24,7 @@ class AddTodo extends Component {
         <form onSubmit={this.handleSubmit}>
           <h6>New todo:</h6>
           <input type="text" id="content" onChange={this.handleChange} value={this.state.content}/>
-        <button class="waves-effect waves-light btn-large">Submit</button>
+        <button className="waves-effect waves-light btn-large">Submit</button>
         </form>
       </div>
     );
@@ -31,4 +32,10 @@ class AddTodo extends Component {
 
 }
 
-export default AddTodo;
+const mapDispatchToProps = dispatch => {
+  return {
+    addTodo: todo => { dispatch (addTodo(todo))}
+  }
+}
+
+export default connect(state => {return {}}, mapDispatchToProps)(AddTodo);
