@@ -12,11 +12,12 @@ class Completed extends Component {
       <p>You have not completeed any todo's!</p>
     )}
 
-    render () {return this.props.showCompleted ? (
+    render () {
+      return (
       <div className="completed-list">
         {this.getcompletedList()}
       </div>
-    ): null;
+    );
     }
 }
 
