@@ -25,7 +25,7 @@ const rootReducer = (state = initState, action) => {
 }
 
 const deleteTodo = (state, index) => {
-  let todos = state.todos.filter((todo, tIndex) => {
+  const todos = state.todos.filter((todo, tIndex) => {
     return index !== tIndex;
   });
   return {...state, todos}
@@ -33,7 +33,7 @@ const deleteTodo = (state, index) => {
 
 const completeTodo = (state, index) => {
   let completed = [...state.completed];
-  let todos = state.todos.filter((todo, tIndex) => {
+  const todos = state.todos.filter((todo, tIndex) => {
     if (index === tIndex){
       completed.push(todo);
       return false;
@@ -44,8 +44,7 @@ const completeTodo = (state, index) => {
 }
 
 const addTodo = (state, todo) => {
-  let newTodos = [...state.todos, todo];
-  console.log(newTodos);
+  const newTodos = [...state.todos, todo];
   return {...state, todos: newTodos};
 }
 
