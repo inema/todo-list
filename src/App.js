@@ -11,7 +11,8 @@ class App extends Component {
     <BrowserRouter>
       <NavBar />
       <Header />
-    <Route exact path='/' component={TodoList} />
+      <br />
+      <Route exact path='/' component={TodoList} />
       <Route path='/completed' component={CompletedList} />
     </BrowserRouter>
     );

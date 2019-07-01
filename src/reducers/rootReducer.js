@@ -4,7 +4,8 @@ const initState = {
     { content: 'clean house'}
   ],
   completed : [],
-  showCompleted : false
+  showCompleted : false,
+  title: null
 }
 
 const rootReducer = (state = initState, action) => {
