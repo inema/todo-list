@@ -5,7 +5,7 @@ class Weather extends Component {
   state = {
         error: null,
         isLoaded: false,
-        weatherText: null
+        weatherText: ""
   }
 
   componentDidMount() {
@@ -26,12 +26,12 @@ class Weather extends Component {
   }
 
   render() {
-    const { error, isLoaded, weatherText} = this.state;
+    const { error, isLoaded, weatherText } = this.state;
     const {perfectDay, loadingText} = WeatherClass;
     if (error) {
-      return <div>Error: {error.message}</div>;
+      return <p>{perfectDay}</p>;
     } else if (!isLoaded) {
-      return <div>{loadingText}</div>;
+      return <p>{loadingText}</p>;
     } else {
       return (
         <div className="weather">

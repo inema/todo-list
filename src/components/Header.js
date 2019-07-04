@@ -1,13 +1,10 @@
 import React, {Component} from 'react';
 import Weather from './Weather.js';
 import { withRouter } from 'react-router-dom';
+import HeaderClass from "../constants/HeaderClass.js"
 
 class Header extends Component {
-  constructor(props){
-    super(props);
-    const title = window.location.pathname === '/completed' ? "Completed List" : "Todo List";
-    this.state = {title: title};
-  }
+  state = {title: this.getTitle};
 
   componentWillMount() {
       const { history } = this.props;
@@ -21,10 +18,13 @@ class Header extends Component {
     console.log(location);
     this.setTitle();
   }
-  setTitle = () => {
-    const title = window.location.pathname === '/completed' ? "Completed List" : "Todo List";
-    this.setState({title});
+
+  getTitle = () => {
+    const {completedPath, completedTitle, todoTitle} = HeaderClass;
+    return window.location.pathname === completedPath ? completedTitle : todoTitle;
   }
+
+  setTitle = () => this.setState({title: this.getTitle()});
 
   render() {
     return (
