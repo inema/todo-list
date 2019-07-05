@@ -9,7 +9,7 @@ class Completed extends Component {
         </div>
       );
     })) : (
-      <p>You have not completeed any todo's!</p>
+      <p>You have not completed any todo's!</p>
     )}
 
     render () {

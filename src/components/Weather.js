@@ -5,7 +5,7 @@ class Weather extends Component {
   state = {
         error: null,
         isLoaded: false,
-        weatherText: ""
+        weatherText: null
   }
 
   componentDidMount() {
@@ -13,7 +13,7 @@ class Weather extends Component {
     fetch(weatherUrl)
       .then(res => res.json()).then(weatherRes => {
         const abbreviation = weatherRes.consolidated_weather[0].weather_state_abbr;
-        const image = <img src={imageUrl(abbreviation)} style={{maxHeight: "20px", maxWidth: "20px"}} alt="weather icon" />;
+        const image = <img key="1" src={imageUrl(abbreviation)} style={{maxHeight: "20px", maxWidth: "20px"}} alt="weather icon" />;
         this.setState({weatherText: weatherText(abbreviation, image), isLoaded: true});
       },
       error => {
