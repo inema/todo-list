@@ -9,6 +9,7 @@ export const completeTodo = index => {
 export const addTodo = todo => {
   return {type: 'ADD_TODO', todo}
 }
+
 export const setShowCompleted = showCompleted => {
   return {type: 'SET_SHOW_COMPLETED', showCompleted}
 }

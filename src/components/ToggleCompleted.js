@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {setShowCompleted} from '../actions/todoActions';
+import TodoClass from "../constants/TodoClass.js"
 
 class ToggleCompleted extends Component {
   state = {
-    completedButtonText : "Show Completed"
+    completedButtonText : TodoClass.showCompleted
   }
 
   onClick = () => {
-    let completedButtonText = !this.props.showCompleted ? "Hide Completed" : "Show Completed";
+    const {hideCompleted, showCompleted} = TodoClass;
+    const completedButtonText = !this.props.showCompleted ? hideCompleted : showCompleted;
     this.props.setShowCompleted(!this.props.showCompleted);
     this.setState({completedButtonText});
   }
