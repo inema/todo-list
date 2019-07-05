@@ -9,20 +9,13 @@ const initState = {
 }
 
 const rootReducer = (state = initState, action) => {
-  if (action.type === 'DELETE_TODO') {
-    return deleteTodo(state, action.index);
+  switch (action.type) {
+    case 'DELETE_TODO': return deleteTodo(state, action.index);
+    case 'COMPLETE_TODO': return completeTodo(state, action.index);
+    case 'ADD_TODO': return addTodo(state, action.todo);
+    case 'SET_SHOW_COMPLETED': return setShowCompleted(state, action.showCompleted);
+    default: return state;
   }
-  if (action.type === 'COMPLETE_TODO') {
-    return completeTodo(state, action.index);
-  }
-  if (action.type === 'ADD_TODO') {
-    return addTodo(state, action.todo);
-  }
-  if (action.type === 'SET_SHOW_COMPLETED') {
-    return setShowCompleted(state, action.showCompleted);
-  }
-
-  return state;
 }
 
 const deleteTodo = (state, index) => {
